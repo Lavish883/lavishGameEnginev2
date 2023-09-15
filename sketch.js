@@ -13,7 +13,7 @@ function setup() {
     console.log("lavishGE v0.1.0");
     //console.log(playerImage);
     lavishGE.amountOfLayers = 3;
-    player = new lavishGE.Sprite(100, 100, 50, 50);
+    player = new lavishGE.Sprite(0, 100, 50, 50);
     player.scale = 3;
     player.colliderHeight = 32;
     player.colliderWidth = 32;

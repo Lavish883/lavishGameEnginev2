@@ -1,6 +1,7 @@
 var player;
 var floor1;
 var ball;
+var rectangle1;
 var playerImage;
 
 function preload() {
@@ -17,8 +18,10 @@ function setup() {
     player.scale = 3;
     player.colliderHeight = 32;
     player.colliderWidth = 32;
+    player.bouncieness = 0;
     player.debug = true;
     player.img = playerImage;
+    player.jumped = false;
     player.img = "/imgs/player (1).png";
     player.addAnis({
         "idle": {
@@ -45,10 +48,33 @@ function setup() {
     //ball.scale = 2;
     //ball.debug = true;
     noSmooth();
+    rectangle1 = new lavishGE.Sprite(200, 200, 50, 50, "rectangle", "dynamic");
 }
 
 function draw() {
     background(220);
     lavishGE.draw();
-    rect(1, 1, 100, 50)
+    rect(1, 1, 100, 50);
+
+    if (lavishGE.Keyboard.isKeyDown("D")) {
+        console.log("D is down");
+        player.flipX = false;
+        player.velocityX = 2;
+    } else if (lavishGE.Keyboard.isKeyDown("A")) {
+        console.log("A is down");
+        player.flipX = true;
+        player.velocityX = -2;
+    } else {
+        player.velocityX = 0;
+    }
+
+    if (lavishGE.Keyboard.isKeyDown("W") && player.jumped == false) {
+        console.log("W is down");
+        player.jumped = true;
+        player.velocityY = -5;
+    }
+
+    if (player.velocityY >= 0 && player.velocityY < 0.0001) {
+        player.jumped = false;
+    }
 }
